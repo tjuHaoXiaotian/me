@@ -224,7 +224,7 @@ public class NewsController {
     }
 
     /**
-     * 删除某条新闻
+     * 删除某条新闻(假删除)
      * @param id
      * @return
      */
@@ -232,36 +232,60 @@ public class NewsController {
     public @ResponseBody
     StateCode deleteNews(@PathVariable("id") int id){
 
-        boolean deleteImageResult = true;
+//        boolean deleteImageResult = true;
+////
+////        System.out.println(new File(NewsController.class.getResource("/").toString()).getParent());
+////        System.out.println("UrlUtil:"+PathUtil.BASE_FILE_PATH);
+//        Set<String> imageUrls = new HashSet<String>();
+//        String content = newsService.getNews(id).getContent();
+//        while (content.contains("<img")){
+//            int index = content.indexOf("<img");
+//            int endIndex = content.indexOf("/>",index) + 2;
+//            String imgBlock = content.substring(index, endIndex);
+//            imageUrls.add(imgBlock);
+////            System.out.println(imgBlock);
+//            content = content.substring(endIndex);
+//        }
 //
-//        System.out.println(new File(NewsController.class.getResource("/").toString()).getParent());
-//        System.out.println("UrlUtil:"+PathUtil.BASE_FILE_PATH);
-        Set<String> imageUrls = new HashSet<String>();
-        String content = newsService.getNews(id).getContent();
-        while (content.contains("<img")){
-            int index = content.indexOf("<img");
-            int endIndex = content.indexOf("/>",index) + 2;
-            String imgBlock = content.substring(index, endIndex);
-            imageUrls.add(imgBlock);
-//            System.out.println(imgBlock);
-            content = content.substring(endIndex);
+//        Iterator<String> imageIterator = imageUrls.iterator();
+//        while (imageIterator.hasNext()){
+//            String imgBlock = imageIterator.next();
+////            System.out.println("-----------------------------\n" + imgBlock);
+//            int srcIndex = imgBlock.indexOf("src") + 5;
+//            int srcEndIndex = imgBlock.indexOf('\"',srcIndex);
+//            String url = imgBlock.substring(srcIndex, srcEndIndex);
+//
+//            url = (PathUtil.BASE_FILE_PATH+url).replace("/",File.separator);
+//
+//            FileUtil.deleteFile(url);
+//        }
+//
+//        newsService.deleteNews(id);
+        News news = newsService.getNews(id);
+        if(news!=null){
+            newsService.deleteNewsByStatus(id);
+            return StateCode.buildCode(BizCode.SUCCESS);
+        }else{
+            return StateCode.buildCode(BizCode.FAIL);
         }
+    }
 
-        Iterator<String> imageIterator = imageUrls.iterator();
-        while (imageIterator.hasNext()){
-            String imgBlock = imageIterator.next();
-//            System.out.println("-----------------------------\n" + imgBlock);
-            int srcIndex = imgBlock.indexOf("src") + 5;
-            int srcEndIndex = imgBlock.indexOf('\"',srcIndex);
-            String url = imgBlock.substring(srcIndex, srcEndIndex);
 
-            url = (PathUtil.BASE_FILE_PATH+url).replace("/",File.separator);
-
-            FileUtil.deleteFile(url);
+    /**
+     * 删除某条新闻(假删除)
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/recovery/{id}",method = RequestMethod.PUT,produces = {"application/json;charset=UTF-8"})
+    public @ResponseBody
+    StateCode deDeleteNews(@PathVariable("id") int id){
+        News news = newsService.getNews(id);
+        if(news!=null){
+            newsService.updateStatus(3,id);
+            return StateCode.buildCode(BizCode.SUCCESS);
+        }else{
+            return StateCode.buildCode(BizCode.FAIL);
         }
-
-        newsService.deleteNews(id);
-        return StateCode.buildCode(BizCode.SUCCESS);
     }
 
 

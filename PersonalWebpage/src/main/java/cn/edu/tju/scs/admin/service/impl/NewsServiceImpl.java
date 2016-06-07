@@ -25,6 +25,16 @@ public class NewsServiceImpl implements NewsService{
         return newsDao.getAllBriefInfo();
     }
 
+    /**
+     * 根据类型查询所有新闻(不包括删除的)
+     * @param typeId
+     * @return
+     */
+    @Override
+    public List<News> getAllPublished(Integer typeId){
+        return newsDao.getAllPublishedBriefInfo(typeId);
+    }
+
     @Override
     public List<News> getAllDrafts() {
         return newsDao.getAllBriefDrafts();
@@ -38,6 +48,11 @@ public class NewsServiceImpl implements NewsService{
     @Override
     public List<News> getAllDraftsByFromUser(String fromUser) {
         return newsDao.getAllBriefDraftsByFromUser(fromUser);
+    }
+
+    @Override
+    public void deleteNewsByStatus(int id) {
+        newsDao.updateNewsStatus(-1,id);
     }
 
     @Override

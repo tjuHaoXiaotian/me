@@ -308,7 +308,7 @@
                 id:$("#newsTypes").val()
             },
             content:UE.getEditor('editor').getContent(),
-            briefContent:UE.getEditor('editor').getContentTxt().substring(0,25)
+            briefContent:UE.getEditor('editor').getContentTxt().substring(0,50)
         };
 
         console.log("数据是：",JSON.stringify(news));

@@ -31,11 +31,18 @@ public interface NewsService {
     public List<News> getAllDraftsByStatus(int status);
 
     /**
-     * 根据类型查询所有新闻（已发布）
+     * 根据类型查询所有新闻(包括删除的)
      * @param typeId
      * @return
      */
     public List<News> getAll(int typeId);
+
+    /**
+     * 根据类型查询所有新闻(不包括删除的)
+     * @param typeId
+     * @return
+     */
+    public List<News> getAllPublished(Integer typeId);
 
     public News getNews(int id);
 
@@ -79,4 +86,6 @@ public interface NewsService {
     public void updateStatus(int status, int newsId);
 
     public List<News> getAllDraftsByFromUser(String fromUser);
+
+    public void deleteNewsByStatus(int id);
 }

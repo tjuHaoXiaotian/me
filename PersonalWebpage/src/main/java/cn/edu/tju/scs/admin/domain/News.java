@@ -40,7 +40,7 @@ public class News extends BaseDomain {
 
     // 权重（1：置顶，0：不置顶）
     private int weight;
-    // 状态  0:： 待审核  1：已通过 2：未通过 3：已发布
+    // 状态  0:： 待审核  1：已通过 2：未通过 3：已发布,-1 已删除
     private int status;
 
     private String fromUser;

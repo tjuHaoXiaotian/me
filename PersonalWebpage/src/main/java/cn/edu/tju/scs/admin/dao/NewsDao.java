@@ -60,12 +60,27 @@ public class NewsDao extends BaseDao<News,Integer> {
     }
 
     /**
-     * 查看所有已发布新闻
+     * 查看所有已发布新闻（包括删除）
      * @return
      */
     public List<News> getAllBriefInfo(){
-        String hql = "select new News(id, title, keyWords, briefContent,fromUser, visitedTimes,status,createTime,updateTime,checkTime,imageUrl,type) from News news where news.status = 3 order by news.id desc";
+        String hql = "select new News(id, title, keyWords, briefContent,fromUser, visitedTimes,status,createTime,updateTime,checkTime,imageUrl,type) from News news order by news.id desc";
         return this.getListByHQL(hql);
+    }
+
+    /**
+     * 查看所有已发布新闻(不包括删除的)
+     * @return
+     */
+    public List<News> getAllPublishedBriefInfo(Integer typeId){
+        String hql = null;
+        if(typeId == null){
+            hql = "select new News(id, title, keyWords, briefContent,fromUser, visitedTimes,status,createTime,updateTime,checkTime,imageUrl,type) from News news where news.status = 3 order by news.id desc";
+            return this.getListByHQL(hql);
+        }else{
+            hql = "select new News(id, title, keyWords, briefContent,fromUser, visitedTimes,status,createTime,updateTime,checkTime,imageUrl,type) from News news where news.status = 3 and news.type.id = ? order by news.id desc";
+            return this.getListByHQL(hql,typeId);
+        }
     }
 
     /**
@@ -102,8 +117,8 @@ public class NewsDao extends BaseDao<News,Integer> {
 
     /**
      * 更新编号 id 新闻的状态
-     * @param status
-     * @param newsId
+     * @param status 状态
+     * @param newsId news id
      */
     public void updateNewsStatus(int status,int newsId){
         String sql = "update news news set news.status = ? where news.id = ?";

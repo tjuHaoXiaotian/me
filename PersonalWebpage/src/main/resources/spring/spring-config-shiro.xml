@@ -177,7 +177,9 @@
                 /projects.html=anon
                 /index.html=anon
                 /about.html=anon
-                /article.html=anon
+                /articles.html=anon
+                /articles=anon
+                /articles/*=anon
                 /news=anon
                 /cas = cas
                 /** = user,sysUser

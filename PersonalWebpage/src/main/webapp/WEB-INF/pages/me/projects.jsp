@@ -21,7 +21,7 @@
                             <a href="${pageContext.request.contextPath}/projects.html">项目</a>
                         </li>
                         <li  role="presentation">
-                            <a href="${pageContext.request.contextPath}/article.html">文章</a>
+                            <a href="${pageContext.request.contextPath}/articles.html">文章</a>
                         </li>
                         <li  role="presentation">
                             <a href="http://www.cnblogs.com/1995hxt/">博客</a>

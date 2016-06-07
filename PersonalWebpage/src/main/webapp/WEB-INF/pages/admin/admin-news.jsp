@@ -5,7 +5,20 @@
     <div class="am-modal-dialog">
         <div class="am-modal-hd">TJUSAU</div>
         <div class="am-modal-bd">
-            你，确定要删除pian篇文章吗？
+            你，确定要删除这篇文章吗？
+        </div>
+        <div class="am-modal-footer">
+            <span class="am-modal-btn" data-am-modal-cancel>取消</span>
+            <span class="am-modal-btn" data-am-modal-confirm>确定</span>
+        </div>
+    </div>
+</div>
+
+<div class="am-modal am-modal-confirm" tabindex="-1" id="my-confirm-recovery">
+    <div class="am-modal-dialog">
+        <div class="am-modal-hd">TJUSAU</div>
+        <div class="am-modal-bd">
+            你，确定要恢复这篇文章吗？
         </div>
         <div class="am-modal-footer">
             <span class="am-modal-btn" data-am-modal-cancel>取消</span>
@@ -161,6 +174,8 @@
                                     return '<span style="color: red">未通过</span>';
                                 }else if(data == 3){
                                     return '<span style="color: #5EB95E">已发布</span>';
+                                }else if(data == -1){
+                                    return '<span style="color: red">已删除</span>';
                                 }
                             };
                         }
@@ -194,7 +209,7 @@
                                     '<div class="am-btn-group am-btn-group-xs"> ' +
                                     '<a href="${pageContext.request.contextPath}/news/view/'+data+'" class="am-btn am-btn-default am-btn-xs"> <span class="am-icon-file-image-o am-text-primary">查看</span></a> ' +
                                     '<a href="${pageContext.request.contextPath}/news/edit/'+data+'" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span>编辑</a> ' +
-                                    '<a onclick="deleteClick('+data+',this)" class="btn-delete am-btn am-btn-default am-btn-xs  am-hide-sm-only" id="'+data+'"><span class="am-text-danger am-icon-trash-o">删除</span> </a> ' +
+                                    getDeleteOrRecovery(data,row.status)+
                                     '</div> </div>';
                         }
                     }]
@@ -203,6 +218,14 @@
         });
 
 
+    }
+
+    function getDeleteOrRecovery(data,status){
+        if(status == -1){
+           return '<a onclick="recoverClick('+data+',this)" class="btn-delete am-btn am-btn-default am-btn-xs  am-hide-sm-only" id="'+data+'"><span class="am-text-danger am-icon-trash-o">恢复</span> </a> ';
+        }else{
+            return '<a onclick="deleteClick('+data+',this)" class="btn-delete am-btn am-btn-default am-btn-xs  am-hide-sm-only" id="'+data+'"><span class="am-text-danger am-icon-trash-o">删除</span> </a> ';
+        }
     }
 
     function deleteType(id){
@@ -231,6 +254,35 @@
             // closeOnConfirm: false,
             onCancel: function() {
             }
+        });
+    }
+
+    function recoverClick(id,ele) {
+        $('#my-confirm-recovery').modal({
+            relatedTarget: ele,
+            onConfirm: function(options) {
+                var $link = $(this.relatedTarget);
+                console.log("数据：",$link.attr("id"));
+                recoverArticle($link.attr("id"));
+            },
+            // closeOnConfirm: false,
+            onCancel: function() {
+            }
+        });
+    }
+
+    function recoverArticle(id){
+        $.ajax({
+            url: rootUrl+'${pageContext.request.contextPath}/news/recovery/'+id,
+
+//             contentType:"application/json",
+            type: 'put',
+            dataType: 'json'
+//             data:JSON.stringify(newApply)
+        }).success(function(data){
+            loadTable();
+        }).error(function(){
+            alert("恢复失败");
         });
     }
 
