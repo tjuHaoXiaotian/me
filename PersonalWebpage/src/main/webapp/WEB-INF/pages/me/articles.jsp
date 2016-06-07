@@ -169,13 +169,13 @@
                     <div class="content download">
                         <ul>
                             <li style="margin-left: -20px">
-                                <a href="${pageContext.request.contextPath}/article.html?type=1" class="">学习</a>
+                                <a href="${pageContext.request.contextPath}/articles.html?type=1" class="">学习</a>
                             </li>
                             <li style="margin-left: -20px">
-                                <a href="${pageContext.request.contextPath}/article.html?type=2" class="">生活</a>
+                                <a href="${pageContext.request.contextPath}/articles.html?type=2" class="">生活</a>
                             </li>
                             <li style="margin-left: -20px">
-                                <a href="${pageContext.request.contextPath}/article.html?type=3" class="">感悟与成长</a>
+                                <a href="${pageContext.request.contextPath}/articles.html?type=3" class="">感悟与成长</a>
                             </li>
                         </ul>
                     </div>
@@ -226,8 +226,10 @@
     }
 
     function getImage(imageUrl){
-        if(imageUrl != null){
+        if(imageUrl != null && imageUrl !=""){
             return '<img src="'+imageUrl+'"></img>'
+        }else{
+            return ""
         }
     }
 

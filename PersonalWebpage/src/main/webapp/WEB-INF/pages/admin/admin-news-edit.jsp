@@ -272,32 +272,17 @@
     });
 
 
-
+var ue;
     function initFormData(){
 
         //实例化编辑器
         //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
-        var ue = UE.getEditor('editor',{
+        ue = UE.getEditor('editor',{
             autoHeightEnabled: false,
             autoFloatEnabled: false
         });
 
         getTypes();
-
-        <%--$("#newsId").val('${news.id}');--%>
-        <%--$("#title").val('${news.title}');--%>
-        <%--$("#keyWords").val('${news.keyWords}');--%>
-        <%--$("#newsTypes").val('${news.type.id}');--%>
-        <%--//对编辑器的操作最好在编辑器ready之后再做--%>
-<%--//        var content = ;--%>
-        <%--ue.ready(function() {--%>
-            <%--//设置编辑器的内容--%>
-            <%--ue.setContent('${news.content}');--%>
-<%--//                    //获取html内容，返回: <p>hello</p>--%>
-<%--//                    var html = ue.getContent();--%>
-<%--//                    //获取纯文本内容，返回: hello--%>
-<%--//                    var txt = ue.getContentTxt();--%>
-        <%--});--%>
 
 
         $.ajax({
