@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 引入外部的属性文件 -->
+    <context:property-placeholder location="classpath:jdbc.properties"/>
+
+    <context:component-scan base-package="cn.edu.tju.scs.club.dao"/>
+
+    <context:component-scan base-package="cn.edu.tju.scs.admin.dao"/>
+
+
+    <!-- 配置 c3p0 连接池 -->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <!-- 设置JDBC驱动名称 -->
+        <property name="driverClass" value="${jdbc.driverClass}"></property>
+        <!-- 设置JDBC连接URL -->
+        <property name="jdbcUrl" value="${jdbc.url}"></property>
+        <!-- 设置数据库用户名 -->
+        <property name="user" value="${jdbc.username}"></property>
+        <!-- 设置数据库密码 -->
+        <property name="password" value="${jdbc.password}"></property>
+    </bean>
+
+    <!-- 配置SessionFactory -->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="hibernateProperties">
+            <props>
+                <!-- 指定数据库方言 -->
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                <!--根据需要自动创建数据表--><!-- DB schema will be updated if needed -->
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+                <!-- 显示hibernate 持久化生成的SQL -->
+                <prop key="hibernate.show_sql">true</prop>
+                <!-- 将sql脚本进行格式化后再输出 -->
+                <prop key="hibernate.format_sql">true</prop>
+                <!--<prop key="hibernate.connection.url">${jdbc.username}</prop>-->
+                <!--<prop key="hibernate.connection.driver_class">${jdbc.driverClass}</prop>-->
+                <!-- 数据库事务不自动提高 -->
+                <prop key="hibernate.connection.autocommit">false</prop>
+            </props>
+        </property>
+        <!--<property name="configLocations">-->
+        <!--<list>-->
+        <!--<value>-->
+        <!--classpath*:hibernate.cfg.xml-->
+        <!--</value>-->
+        <!--</list>-->
+        <!--</property>-->
+        <!--<property name="annotatedClasses">-->
+            <!--<list>-->
+                <!--<value>cn.edu.tju.cas.entity.GroupEntity</value>-->
+                <!--<value>cn.edu.tju.cas.entity.SystemEntity</value>-->
+                <!--<value>cn.edu.tju.cas.entity.GroupFormEntity</value>-->
+                <!--<value>cn.edu.tju.cas.entity.UserGroupApplyEntity</value>-->
+                <!--<value>cn.edu.tju.cas.entity.UserGroupFormValueEntity</value>-->
+                <!--<value>cn.edu.tju.cas.entity.UserEntity</value>-->
+            <!--</list>-->
+        <!--</property>-->
+        <property name="mappingLocations">
+            <list>
+                <!--社团-->
+
+                <value>classpath:hibernate/club/Admin.hbm.xml</value>
+                <!--<value>classpath:hibernate/club/Apply.hbm.xml</value>-->
+                <value>classpath:hibernate/club/Club.hbm.xml</value>
+                <!--<value>classpath:hibernate/club/MemberApply.hbm.xml</value>-->
+                <value>classpath:hibernate/club/Department.hbm.xml</value>
+                <!--<value>classpath:hibernate/club/DepImage.hbm.xml</value>-->
+                <value>classpath:hibernate/club/User.hbm.xml</value>
+
+                <!--新闻-->
+                <value>classpath:hibernate/news/NewsType.hbm.xml</value>
+                <value>classpath:hibernate/news/News.hbm.xml</value>
+                <value>classpath:hibernate/news/IndexPicNews.hbm.xml</value>
+
+                <!--auth-->
+                <value>classpath:hibernate/auth/Permission.hbm.xml</value>
+                <value>classpath:hibernate/auth/Role.hbm.xml</value>
+
+            </list>
+        </property>
+        <!--<property name="annotatedClasses">-->
+        <!--<list>-->
+        <!--<value>com.tgb.entity.User</value>-->
+        <!--</list>-->
+        <!--</property>-->
+    </bean>
+
+    <bean id="adminDao" class="cn.edu.tju.scs.club.dao.AdminDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <!--<bean id="videoDao" class="cn.edu.tju.scs.club.dao.ApplyDao">-->
+        <!--<property name="sessionFactory" ref="sessionFactory"/>-->
+    <!--</bean>-->
+
+    <bean id="clubDao" class="cn.edu.tju.scs.club.dao.ClubDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="userDao" class="cn.edu.tju.scs.club.dao.UserDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="departmentDao" class="cn.edu.tju.scs.club.dao.DepartmentDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <!--<bean id="applyDao" class="cn.edu.tju.scs.club.dao.ApplyDao">-->
+        <!--<property name="sessionFactory" ref="sessionFactory"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="memberApplyDao" class="cn.edu.tju.scs.club.dao.MemberApplyDao">-->
+        <!--<property name="sessionFactory" ref="sessionFactory"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="depImageDao" class="cn.edu.tju.scs.club.dao.DepImageDao">-->
+        <!--<property name="sessionFactory" ref="sessionFactory"/>-->
+    <!--</bean>-->
+
+
+
+    <bean id="newsDao" class="cn.edu.tju.scs.admin.dao.NewsDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+
+    <bean id="newsTypeDao" class="cn.edu.tju.scs.admin.dao.NewsTypeDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="indexPicNewsDao" class="cn.edu.tju.scs.admin.dao.IndexPicNewsDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <!--<bean id="clubService" class="cn.edu.tju.scs.club.service.impl.ClubServiceImpl">-->
+        <!--<property name="c"-->
+    <!--</bean>-->
+
+
+    <bean id="permissionDao" class="cn.edu.tju.scs.auth.dao.PermissionDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="roleDao" class="cn.edu.tju.scs.auth.dao.RoleDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+
+</beans>

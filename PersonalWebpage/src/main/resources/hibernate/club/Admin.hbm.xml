@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="cn.edu.tju.scs.domain">
+
+<class name="cn.edu.tju.scs.club.domain.Admin" table="admins">
+    <id name="adminId" type="java.lang.Integer">
+        <!--  //字段自增-->
+        <column name="ID" sql-type="int(11)"/>
+        <generator class="native"/>
+    </id>
+
+    <property name="adminName" type="java.lang.String"  not-null="true">
+        <column name="ADMIN_NAME" sql-type="varchar(255)" not-null="true"/>
+    </property>
+
+    <property name="password" type="java.lang.String"  not-null="true">
+        <column name="PASSWORD" sql-type="varchar(255)" not-null="true"/>
+    </property>
+
+    <property name="createtime" type="java.sql.Timestamp" not-null="false">
+        <column name="CREATE_TIME" sql-type="timestamp" default="CURRENT_TIMESTAMP"/>
+    </property>
+
+    <property name="updatetime" type="java.sql.Timestamp" not-null="false">
+        <column name="UPDATE_TIME" sql-type="timestamp" default="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"/>
+    </property>
+
+</class>
+
+</hibernate-mapping>

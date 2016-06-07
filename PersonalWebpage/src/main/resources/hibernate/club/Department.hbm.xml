@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="cn.edu.tju.scs.domain">
+
+<class name="cn.edu.tju.scs.club.domain.Department" table="department">
+
+    <id name="depId" type="java.lang.Integer">
+        <column name="DEPARTMENT_ID" sql-type="int(11)" not-null="true"/>
+        <!--  //字段自增-->
+        <generator class="native"/>
+    </id>
+
+    <property name="depName" type="java.lang.String"  not-null="false">
+        <column name="DEPARTMENT_NAME" sql-type="varchar(255)"/>
+    </property>
+
+    <property name="tel" type="java.lang.String"  not-null="false">
+        <column name="TEL" sql-type="varchar(255)" not-null="false"/>
+    </property>
+
+    <property name="email" type="java.lang.String"  not-null="false">
+        <column name="EMAIL" sql-type="varchar(255)" not-null="false"/>
+    </property>
+
+    <property name="introduction" type="java.lang.String"  not-null="false">
+        <column name="INTRODUCTION" sql-type="TEXT" not-null="false"/>
+    </property>
+
+    <property name="briefIntroduction" type="java.lang.String"  not-null="false">
+        <column name="BRIEF_INTRODUCTION" sql-type="varchar(255)" not-null="false"/>
+    </property>
+
+    <property name="responsiblePerson" type="java.lang.String"  not-null="false">
+        <column name="RESPONSIBLE_PERSION" sql-type="varchar(255)" not-null="false"/>
+    </property>
+
+
+    <property name="createtime" type="java.sql.Timestamp" not-null="true">
+        <column name="CREATE_TIME" sql-type="timestamp" default="CURRENT_TIMESTAMP" not-null="true"/>
+    </property>
+
+    <property name="updatetime" type="java.sql.Timestamp" not-null="false">
+        <column name="UPDATE_TIME" sql-type="timestamp" default="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP" not-null="true"/>
+    </property>
+
+    <!-- unique="true"保证了外键在Person表中的唯一 -->
+    <many-to-one name="club"  class="cn.edu.tju.scs.club.domain.Club" not-null="true" lazy="false">
+        <column name="REF_CLUB_ID" sql-type="int(11)" not-null="true"/>
+    </many-to-one>
+
+    <!--<list name="images" lazy="false" cascade="all-delete-orphan"> &lt;!&ndash; 加入了级联属性，所以一端变化，另一端也会变化 inverse=true? &ndash;&gt;-->
+        <!--<key column="refDepId"/>     &lt;!&ndash; 外键名称 &ndash;&gt;-->
+        <!--<list-index column="itemIndex"/>-->
+        <!--<one-to-many class="cn.edu.tju.scs.club.domain.DepImage"/>-->
+    <!--</list>-->
+
+    <!--<set name="memberApplies" table="t_member_dep" cascade="save-update" inverse="true">-->
+        <!--<key column="departmentId"/>-->
+        <!--<many-to-many class="cn.edu.tju.scs.club.domain.MemberApply" column="memberApplyId"/>-->
+    <!--</set>-->
+</class>
+
+</hibernate-mapping>

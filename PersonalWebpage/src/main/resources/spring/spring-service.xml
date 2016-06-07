@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="cn.edu.tju.scs.club.service"/>
+
+    <context:component-scan base-package="cn.edu.tju.scs.admin.service"/>
+
+    <context:component-scan base-package="cn.edu.tju.scs.auth.service"/>
+
+
+
+    <!-- 配置一个事务管理器 -->
+    <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <!-- 配置一个事务的通知：（事务增强） -->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <!--
+                 propagation:事务的传播行为
+                 isolation：事务的隔离级别
+                 read-only:只读
+                 rollback-for:发生哪些异常回滚
+                 no-rollback-for:发生哪些异常不会滚
+                 timeout:过期信息（-1）
+             -->
+            <tx:method name="*" propagation="REQUIRED"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <!-- 配置切面 -->
+    <aop:config>
+        <!-- 配置切入点,   +号代表子类 -->
+        <aop:pointcut expression="execution(* cn.edu.tju.scs.*.service.impl.*.*(..))" id="pointCut1"/>
+        <!-- 配置切面,advisor 一个切入点，一个通知;aspect 多个切入点，多个通知-->
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="pointCut1"/>
+    </aop:config>
+
+
+
+</beans>
