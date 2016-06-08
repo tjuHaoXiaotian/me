@@ -4,8 +4,8 @@ import cn.edu.tju.scs.admin.domain.IndexPicNews;
 import cn.edu.tju.scs.admin.util.FileUtil;
 import cn.edu.tju.scs.admin.util.PathUtil;
 import cn.edu.tju.scs.common.Constants;
-import cn.edu.tju.scs.club.domain.User;
-import cn.edu.tju.scs.club.service.UserService;
+import cn.edu.tju.scs.me.domain.User;
+import cn.edu.tju.scs.me.service.UserService;
 import cn.edu.tju.scs.club.web.controller.base.BaseController;
 import cn.edu.tju.scs.common.dto.BizCode;
 import cn.edu.tju.scs.common.dto.StateCode;
@@ -61,17 +61,6 @@ public class IndexController extends BaseController{
         return "/admin/admin-news-drafts-new";
     }
 
-    /**
-     * 社团管理界面 我的投稿
-     * @return
-     */
-    @RequestMapping(value = "/posts/mine",method = RequestMethod.GET)
-    public String minePost(HttpSession httpSession,Model model){
-        // 设置 填写用户
-        User user = (User) httpSession.getAttribute(Constants.CURRENT_USER);
-        model.addAttribute("fromUser",user.getClub().getName()+":"+user.getAccount());
-        return "/admin/admin-news-drafts";
-    }
 
     /**
      * 后台添加并发布新闻
@@ -105,17 +94,6 @@ public class IndexController extends BaseController{
     }
 
 
-    @RequestMapping(value = "/club.html",method = RequestMethod.GET)
-    public String myClub(Model model,HttpSession httpSession){
-//        System.out.println("注解:"+user);
-        User user = (User) httpSession.getAttribute(Constants.CURRENT_USER);
-        Subject subject = SecurityUtils.getSubject();
-        String username = (String) subject.getPrincipal();
-        model.addAttribute("club",user.getClub());
-//        model.addAttribute("club",userService.findByUsername(username).getClub());
-        return "admin/admin-club";
-    }
-
 
     @Autowired
     IndexPicNewsService indexPicNewsService;
@@ -142,7 +120,11 @@ public class IndexController extends BaseController{
 
         // 设置操作用户：
         User user = (User) httpSession.getAttribute(Constants.CURRENT_USER);
-        indexPicNews.setFromUser(user.getClub().getName()+":"+user.getAccount());
+        if(user.getAccount().equals("3013218138")){
+            indexPicNews.setFromUser("郝晓田");
+        }else{
+            indexPicNews.setFromUser(user.getAccount());
+        }
 
         indexPicNewsService.addIndexPicNews(indexPicNews);
 
@@ -274,36 +256,6 @@ public class IndexController extends BaseController{
 
     }
 
-    @RequestMapping(value = "/login",method = RequestMethod.POST)
-    public String loginAction(@RequestParam("username") String username,@RequestParam("password") String password,HttpServletRequest req, HttpServletResponse resp,Model model){
-        String error = null;
-        Subject subject = SecurityUtils.getSubject();
-        System.out.println(username +"  ; "+ password);
-        UsernamePasswordToken token = new UsernamePasswordToken(username, password);
-        try {
-            subject.login(token);
-        } catch (UnknownAccountException e) {
-            error = "用户名/密码错误";
-        } catch (IncorrectCredentialsException e) {
-            error = "用户名/密码错误";
-        } catch (AuthenticationException e) {
-            //其他错误，比如锁定，如果想单独处理请单独catch处理
-            error = "其他错误：" + e.getMessage();
-        }catch (Exception e){
-            error = "其他错误：" + e.getMessage();
-        }
-        if(error != null) {//出错了，返回登录页面
-            model.addAttribute("error", error);
-            return "admin/admin-login";
-        } else {//登录成功
-            if(subject.hasRole("admin")){
-                return "admin/admin-news";
-            }else{
-                model.addAttribute("club",userService.findByUsername(username).getClub());
-                return "admin/admin-club";
-            }
-        }
-    }
 
     @RequestMapping(value = "/login",method = RequestMethod.GET)
     public String adminLoginPage(){

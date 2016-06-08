@@ -5,51 +5,36 @@
     <div class="row">
       <div class="col-md-4">
         <div class="widget">
-          <h4>最新文章</h4>
-          <div class="content recent-post">
-            <div class="recent-single-post">
-              <a class="post-title" href="#">Ghost 0.7.0 正式发布</a>
-              <div class="date">September 7, 2015</div>
-            </div>
-            <div class="recent-single-post">
-              <a class="post-title" href="#">Ghost 0.7 中 {{ghost_foot}} 助手函数将不再输出 jQuery</a>
-              <div class="date">August 29, 2015</div>
-            </div>
-            <div class="recent-single-post">
-              <a class="post-title" href="#">Ghost 0.7 即将发布，高清大图提前看</a>
-              <div class="date">August 23, 2015</div>
-            </div>
+          <h4 class="title" id="#">最新文章</h4>
+          <div class="content recent-post" id="recent-post">
+
           </div>
         </div>
       </div>
       <div class="col-md-4">
         <div class="widget">
-          <h4 class="title" id="">标签云</h4>
+          <h4 class="title" id="">友情链接</h4>
           <div class="content tag-cloud">
-            <a href="">Ghost</a>
-            <a href="">新版本发布</a>
-            <a href="">JavaScript</a>
-            <a href="">Promise</a>
-            <a href="">主题</a>
-            <a href="">MySQL</a>
-            <a href="">Node.js</a>
-            <a href="">深度玩转 Ghost</a>
-            <a href="">Ubuntu</a>
-            <a href="">阿里云服务</a>
-            <a href="">Nginx</a>
+            <a href="http://www.oracle.com/technetwork/java/javase/downloads/index-jsp-138363.html">Java</a>
+            <a href="http://mvnrepository.com/">Maven</a>
+            <a href="http://hibernate.org/orm/">Hibernate</a>
+            <a href="https://spring.io/">Spring</a>
+            <a href="https://spring.io/">Spring MVC</a>
+            <a href="http://struts.apache.org/">Struts2</a>
+            <a href="http://www.mysql.com/">MySQL</a>
+            <a href="http://jquery.com/">Jquery</a>
+            <a href="http://www.bootcss.com/">BootStrap</a>
+            <a >Linux</a>
+            <a href="https://www.aliyun.com/">阿里云服务</a>
+            <a href="">腾讯云服务</a>
+            <a href="http://nginx.org/">Nginx</a>
           </div>
         </div>
       </div>
       <div class="col-md-4">
         <div class="widget">
-          <h4 class="title">合作伙伴</h4>
-          <a href="#">Bootstrap 中文网</a>
-          <a href="#">开放CDN服务</a>
-          <a href="#">Grunt中文网</a>
-          <a href="#">阿里云</a>
-          <a href="#">又拍云</a>
-          <a href="#">UCloud </a>
-          <a href="#">七牛云存储</a>
+          <h4 class="title">项目</h4>
+          <a href="${pageContext.request.contextPath}/projects.html#lostFound">北洋园LostFound</a>
         </div>
       </div>
     </div>
@@ -70,6 +55,36 @@
 <script src="${pageContext.request.contextPath}/resources/assets/js/jquery.min.js"></script>
 
 <script>
+  var rootUrl = "<%=basePath%>";
+  function loadRecentArticlesForBottom(){
+    $.ajax({
+      url: rootUrl+'${pageContext.request.contextPath}/articles/recent',
+      contentType:"application/json",
+      type: 'get',
+      dataType: 'json'
+    }).success(function(data){
+      if(data.state == 200){
+        var html = "";
+        if(data != null){
+          var articles = data.data.newsArray;
+          console.log("result",articles);
+          var length = articles.length >3?3:articles.length;
+          for(var i = 0; i<length;i++){
+            html+='<div class="recent-single-post">'+
+            '<a class="post-title" href="${pageContext.request.contextPath}/articles/article_'+articles[i].id+'.html">'+articles[i].title+'</a>'+
+            '<div class="date">'+articles[i].updateTime+'</div>'+
+            '    </div>';
+          }
+        }
+        $("#recent-post").html(html);
+      }else{
+        alert("recent-articles 获取失败！");
+      }
+    }).error(function(){
+      alert("recent-articles 获取失败");
+    });
+  }
+
   $(function(){
     $("#menu").find("li").click(function(e){
       e.preventDefault();
@@ -78,13 +93,6 @@
 
     });
 
-//        $("#interest-list").find("a").hover(function(e){
-//            e.preventDefault();
-//            $("#interest-list a").eq($(this).index()).addClass("tag-list-background").siblings().removeClass("tag-list-background");
-//        },function(){
-//            $("#interest-list a").eq($(this).index()).removeClass("tag-list-background");
-//        });
-
     $("#interest-list").find("a").hover(function(e){
       e.preventDefault();
       $("#interest-list a").eq($(this).index()).css("background-color","#e67e22").css("color","white").siblings().css("background-color","white").css("color","#959595");
@@ -92,12 +100,11 @@
       $("#interest-list a").eq($(this).index()).css("background-color","white").css("color","#959595");
     });
 
-//        $("#interest-list a").mouseover(function(e){
-//            e.preventDefault();
-////            $(this).tab("show");
-//            $("#interest-list a").eq($(this).index()).addClass("tag-list-background").siblings().removeClass("tag-list-background");
-//
-//        });
+
+  });
+
+  $(document).ready(function() {
+    loadRecentArticlesForBottom();
   });
 </script>
 </body>

@@ -1,4 +1,4 @@
-package cn.edu.tju.scs.club.util;
+package cn.edu.tju.scs.me.util;
 
 import java.io.File;
 

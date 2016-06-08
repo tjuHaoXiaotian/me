@@ -88,4 +88,6 @@ public interface NewsService {
     public List<News> getAllDraftsByFromUser(String fromUser);
 
     public void deleteNewsByStatus(int id);
+
+    public List<News> getRecentNews();
 }

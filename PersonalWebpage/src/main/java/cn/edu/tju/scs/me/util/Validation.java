@@ -1,4 +1,4 @@
-package cn.edu.tju.scs.club.util;
+package cn.edu.tju.scs.me.util;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

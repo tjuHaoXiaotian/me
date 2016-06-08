@@ -95,7 +95,7 @@
   <div class="admin-sidebar am-offcanvas" id="admin-offcanvas">
     <div class="am-offcanvas-bar admin-offcanvas-bar">
       <ul class="am-list admin-sidebar-list">
-        <li><a href="${pageContext.request.contextPath}/"><span class="am-icon-home"></span>网站首页</a></li>
+        <li><a href="${pageContext.request.contextPath}/" target="_blank"><span class="am-icon-home"></span>网站首页</a></li>
 
         <shiro:hasRole name="admin">
         <li class="admin-parent">

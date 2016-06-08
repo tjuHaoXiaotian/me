@@ -1,6 +1,6 @@
 package cn.edu.tju.scs.auth.realm;
 
-import cn.edu.tju.scs.club.service.UserService;
+import cn.edu.tju.scs.me.service.UserService;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.cas.CasRealm;

@@ -1,6 +1,6 @@
-package cn.edu.tju.scs.club.service;
+package cn.edu.tju.scs.me.service;
 
-import cn.edu.tju.scs.club.domain.User;
+import cn.edu.tju.scs.me.domain.User;
 
 import java.util.Set;
 

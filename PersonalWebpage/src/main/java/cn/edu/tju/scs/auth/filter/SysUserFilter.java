@@ -1,7 +1,7 @@
 package cn.edu.tju.scs.auth.filter;
 
 import cn.edu.tju.scs.common.Constants;
-import cn.edu.tju.scs.club.service.UserService;
+import cn.edu.tju.scs.me.service.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.web.filter.PathMatchingFilter;
 import org.springframework.beans.factory.annotation.Autowired;

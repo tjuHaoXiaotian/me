@@ -56,6 +56,11 @@ public class NewsServiceImpl implements NewsService{
     }
 
     @Override
+    public List<News> getRecentNews() {
+        return newsDao.getRecentNews();
+    }
+
+    @Override
     public List<News> getAll(int typeId) {
         return newsDao.getAllByType(typeId);
     }

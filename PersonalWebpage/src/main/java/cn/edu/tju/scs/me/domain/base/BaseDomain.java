@@ -1,4 +1,4 @@
-package cn.edu.tju.scs.club.domain.base;
+package cn.edu.tju.scs.me.domain.base;
 
 
 

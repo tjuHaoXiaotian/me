@@ -1,13 +1,13 @@
-package cn.edu.tju.scs.club.service.impl;
+package cn.edu.tju.scs.me.service.impl;
 
 import cn.edu.tju.scs.auth.domain.Permission;
 import cn.edu.tju.scs.auth.domain.Role;
 import cn.edu.tju.scs.auth.service.PermissionService;
 import cn.edu.tju.scs.auth.service.RoleService;
 import cn.edu.tju.scs.auth.util.PasswordHelper;
-import cn.edu.tju.scs.club.dao.UserDao;
-import cn.edu.tju.scs.club.domain.User;
-import cn.edu.tju.scs.club.service.UserService;
+import cn.edu.tju.scs.me.dao.UserDao;
+import cn.edu.tju.scs.me.domain.User;
+import cn.edu.tju.scs.me.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

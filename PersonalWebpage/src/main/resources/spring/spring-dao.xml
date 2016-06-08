@@ -10,9 +10,8 @@
     <!-- 引入外部的属性文件 -->
     <context:property-placeholder location="classpath:jdbc.properties"/>
 
-    <context:component-scan base-package="cn.edu.tju.scs.club.dao"/>
+    <context:component-scan base-package="cn.edu.tju.scs.me.dao,cn.edu.tju.scs.admin.dao"/>
 
-    <context:component-scan base-package="cn.edu.tju.scs.admin.dao"/>
 
 
     <!-- 配置 c3p0 连接池 -->
@@ -35,7 +34,7 @@
                 <!-- 指定数据库方言 -->
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
                 <!--根据需要自动创建数据表--><!-- DB schema will be updated if needed -->
-                <prop key="hibernate.hbm2ddl.auto">update</prop>
+                <!--<prop key="hibernate.hbm2ddl.auto">update</prop>-->
                 <!-- 显示hibernate 持久化生成的SQL -->
                 <prop key="hibernate.show_sql">true</prop>
                 <!-- 将sql脚本进行格式化后再输出 -->
@@ -67,11 +66,11 @@
             <list>
                 <!--社团-->
 
-                <value>classpath:hibernate/club/Admin.hbm.xml</value>
+                <!--<value>classpath:hibernate/club/Admin.hbm.xml</value>-->
                 <!--<value>classpath:hibernate/club/Apply.hbm.xml</value>-->
-                <value>classpath:hibernate/club/Club.hbm.xml</value>
+                <!--<value>classpath:hibernate/club/Club.hbm.xml</value>-->
                 <!--<value>classpath:hibernate/club/MemberApply.hbm.xml</value>-->
-                <value>classpath:hibernate/club/Department.hbm.xml</value>
+                <!--<value>classpath:hibernate/club/Department.hbm.xml</value>-->
                 <!--<value>classpath:hibernate/club/DepImage.hbm.xml</value>-->
                 <value>classpath:hibernate/club/User.hbm.xml</value>
 
@@ -93,23 +92,8 @@
         <!--</property>-->
     </bean>
 
-    <bean id="adminDao" class="cn.edu.tju.scs.club.dao.AdminDao">
-        <property name="sessionFactory" ref="sessionFactory"/>
-    </bean>
 
-    <!--<bean id="videoDao" class="cn.edu.tju.scs.club.dao.ApplyDao">-->
-        <!--<property name="sessionFactory" ref="sessionFactory"/>-->
-    <!--</bean>-->
-
-    <bean id="clubDao" class="cn.edu.tju.scs.club.dao.ClubDao">
-        <property name="sessionFactory" ref="sessionFactory"/>
-    </bean>
-
-    <bean id="userDao" class="cn.edu.tju.scs.club.dao.UserDao">
-        <property name="sessionFactory" ref="sessionFactory"/>
-    </bean>
-
-    <bean id="departmentDao" class="cn.edu.tju.scs.club.dao.DepartmentDao">
+    <bean id="userDao" class="cn.edu.tju.scs.me.dao.UserDao">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 

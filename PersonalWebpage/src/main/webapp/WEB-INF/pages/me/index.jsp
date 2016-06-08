@@ -69,7 +69,7 @@
                                     </li>
                                     <li>线上App
                                         <ul>
-                                            <li><a href="projects.html#lostFound">北洋园校区失物招领</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/projects.html#lostFound">北洋园校区失物招领</a></li>
                                         </ul>
                                     </li>
                                 </ul>

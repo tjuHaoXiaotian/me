@@ -3,6 +3,7 @@ package cn.edu.tju.scs.admin.dao;
 import cn.edu.tju.scs.common.dao.base.BaseDao;
 import cn.edu.tju.scs.common.dao.base.PageResults;
 import cn.edu.tju.scs.admin.domain.News;
+import org.hibernate.Query;
 
 import java.util.List;
 
@@ -123,6 +124,13 @@ public class NewsDao extends BaseDao<News,Integer> {
     public void updateNewsStatus(int status,int newsId){
         String sql = "update news news set news.status = ? where news.id = ?";
         this.querySql(sql,status,newsId);
+    }
+
+    public List<News> getRecentNews(){
+        String hql = "select new News(id,title,updateTime) from News news where news.status = 3 order by news.updateTime desc";
+        Query query = this.getSession().createQuery(hql);
+        query.setMaxResults(5);
+        return query.list();
     }
 
 }

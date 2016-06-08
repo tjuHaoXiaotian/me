@@ -1,11 +1,10 @@
 package cn.edu.tju.scs.auth.util;
 
-import cn.edu.tju.scs.club.domain.User;
+import cn.edu.tju.scs.me.domain.User;
 import org.apache.shiro.crypto.RandomNumberGenerator;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.util.ByteSource;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 /**

@@ -3,8 +3,8 @@ package cn.edu.tju.scs.club.web.controller;
 import cn.edu.tju.scs.common.Constants;
 import cn.edu.tju.scs.common.dto.BizCode;
 import cn.edu.tju.scs.common.dto.StateCode;
-import cn.edu.tju.scs.club.domain.User;
-import cn.edu.tju.scs.club.service.UserService;
+import cn.edu.tju.scs.me.domain.User;
+import cn.edu.tju.scs.me.service.UserService;
 import cn.edu.tju.scs.club.web.controller.base.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,6 +38,5 @@ public class UserController extends BaseController {
             System.out.println("无这样的用户——————————————————————————————————————");
             return  StateCode.buildCode(BizCode.WRONGUSER);
         }
-
     }
 }

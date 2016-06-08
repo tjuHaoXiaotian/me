@@ -144,22 +144,8 @@
             <aside class="col-md-4 sidebar" style="margin-top:35px">
                 <div class="widget">
                     <h4 class="title" id="recent-article">最近文章</h4>
-                    <div class="content community">
-                        <P>
-                            <a href="#">飞行可视化，2d & 3d聚类+效果</a>
-                        </P>
-                        <p>
-                            <a href="#">完善个人主页</a>
-                        </p>
-                        <p>
-                            <a href="#">社团联合会项目</a>
-                        </p>
-                        <p>
-                            <a href="#">学习struts2</a>
-                        </p>
-                        <p>
-                            <a href="#">java从菜鸟到笨鸟pdf</a>
-                        </p>
+                    <div class="content community" id="recent-articles">
+
                     </div>
                 </div>
 
@@ -307,7 +293,37 @@
 //       loadTable();
 //    });
 
+    function loadRecentArticles(){
+        $.ajax({
+            url: rootUrl+'${pageContext.request.contextPath}/articles/recent',
+            contentType:"application/json",
+            type: 'get',
+            dataType: 'json'
+//             data:JSON.stringify(newApply)
+        }).success(function(data){
+            if(data.state == 200){
+                var html = "";
+                if(data != null){
+                    var articles = data.data.newsArray;
+                    console.log("result",articles);
+                    for(var i = 0; i<articles.length;i++){
+                        html += '<P>'+
+                        '<a href="${pageContext.request.contextPath}/articles/article_'+articles[i].id+'.html">'+articles[i].title+'</a>'+
+                                '<br><time class="date" datetime="'+articles[i].updateTime+'" style="margin-left:25%">——'+articles[i].updateTime+'</time>'+
+                        '</P>';
+                    }
+                }
+                $("#recent-articles").html(html);
+            }else{
+                alert("recent-articles 获取失败！");
+            }
+        }).error(function(){
+            alert("recent-articles 获取失败");
+        });
+    }
+
     $(document).ready(function() {
         loadTable();
+        loadRecentArticles();
     });
 </script>

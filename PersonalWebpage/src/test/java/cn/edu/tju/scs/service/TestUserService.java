@@ -2,9 +2,8 @@ package cn.edu.tju.scs.service;
 
 import cn.edu.tju.scs.auth.domain.Role;
 import cn.edu.tju.scs.auth.service.RoleService;
-import cn.edu.tju.scs.club.domain.User;
-import cn.edu.tju.scs.club.service.DepartmentService;
-import cn.edu.tju.scs.club.service.UserService;
+import cn.edu.tju.scs.me.domain.User;
+import cn.edu.tju.scs.me.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +29,6 @@ public class TestUserService {
 	@Resource(name="userService")
 	private UserService userService;
 
-    @Resource(name="departmentService")
-    private DepartmentService departmentService;
 
     @Autowired
     private RoleService roleService;
@@ -50,10 +47,6 @@ public class TestUserService {
 
     }
 
-    @Test
-    public void getAll(){
-        departmentService.getAllDepartments(1);
-    }
 
     @Test
     public void testChangePassword(){

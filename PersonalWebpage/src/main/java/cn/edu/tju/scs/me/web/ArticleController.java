@@ -48,4 +48,19 @@ public class ArticleController {
         code.addData("newsArray",newsService.getAllPublished(type));
         return code;
     }
+
+
+    /**
+     * 最近文章
+     * @return
+     */
+    @RequestMapping(value = "/recent",method = RequestMethod.GET,produces = {"application/json;charset=UTF-8"})
+    public @ResponseBody
+    StateCode getRecentArticles(){
+        StateCode code = StateCode.buildCode(BizCode.SUCCESS);
+        code.addData("newsArray",newsService.getRecentNews());
+        return code;
+    }
+
+
 }

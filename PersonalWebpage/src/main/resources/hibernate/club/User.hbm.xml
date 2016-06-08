@@ -3,9 +3,9 @@
 "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
-<hibernate-mapping package="cn.edu.tju.scs.domain">
+<hibernate-mapping package="cn.edu.tju.scs.me.domain">
 
-<class name="cn.edu.tju.scs.club.domain.User" table="users">
+<class name="User" table="users">
     <id name="userId" type="java.lang.Integer">
         <column name="USER_ID" sql-type="int(11)" not-null="true"/>
         <!--  //字段自增-->
@@ -39,9 +39,9 @@
     <!--<one-to-one name="club" class="cn.edu.tju.scs.club.domain.Club" constrained="true" cascade="all" lazy="false">-->
     <!--</one-to-one>-->
 
-    <many-to-one name="club" unique="true" class="cn.edu.tju.scs.club.domain.Club" cascade="all" lazy="false">
-        <column name="REF_CLUB_ID" sql-type="int(11)" not-null="true"/>
-    </many-to-one>
+    <!--<many-to-one name="club" unique="true" class="cn.edu.tju.scs.club.domain.Club" cascade="all" lazy="false">-->
+        <!--<column name="REF_CLUB_ID" sql-type="int(11)" not-null="true"/>-->
+    <!--</many-to-one>-->
 
     <property name="salt" type="java.lang.String" not-null="true">
         <column name="SALT" not-null="true" sql-type="varchar(255)"/>

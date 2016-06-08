@@ -1,8 +1,8 @@
-package cn.edu.tju.scs.club.domain;
+package cn.edu.tju.scs.me.domain;
 
 import cn.edu.tju.scs.admin.common.CustomDateSerializer;
 import cn.edu.tju.scs.auth.domain.Role;
-import cn.edu.tju.scs.club.domain.base.BaseDomain;
+import cn.edu.tju.scs.me.domain.base.BaseDomain;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.sql.Timestamp;
@@ -30,8 +30,8 @@ public class User extends BaseDomain {
     @JsonSerialize(using = CustomDateSerializer.class)
     private Timestamp updatetime;
 
-    // 对应社团
-    private Club club;
+//    // 对应社团
+//    private Club club;
 
     // 用户状态 0 正常， -1 禁用
     private int state;
@@ -45,14 +45,14 @@ public class User extends BaseDomain {
 
     }
 
-    public User(int userId, String account, String password, String lastIp, Timestamp createtime, Timestamp updatetime, Club club, int state) {
+    public User(int userId, String account, String password, String lastIp, Timestamp createtime, Timestamp updatetime, int state) {
         this.userId = userId;
         this.account = account;
         this.password = password;
         this.lastIp = lastIp;
         this.createtime = createtime;
         this.updatetime = updatetime;
-        this.club = club;
+//        this.club = club;
         this.state = state;
     }
 
@@ -104,14 +104,6 @@ public class User extends BaseDomain {
         this.updatetime = updatetime;
     }
 
-    public Club getClub() {
-        return club;
-    }
-
-    public void setClub(Club club) {
-        this.club = club;
-    }
-
     public int getState() {
         return state;
     }
@@ -146,7 +138,6 @@ public class User extends BaseDomain {
                 ", lastIp='" + lastIp + '\'' +
                 ", createtime=" + createtime +
                 ", updatetime=" + updatetime +
-                ", club=" + club +
                 ", state=" + state +
                 ", salt='" + salt + '\'' +
                 ", roles=" + roles +

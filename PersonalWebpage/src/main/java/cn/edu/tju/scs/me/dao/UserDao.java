@@ -1,7 +1,7 @@
-package cn.edu.tju.scs.club.dao;
+package cn.edu.tju.scs.me.dao;
 
 import cn.edu.tju.scs.common.dao.base.BaseDao;
-import cn.edu.tju.scs.club.domain.User;
+import cn.edu.tju.scs.me.domain.User;
 
 /**
  * Video Dao

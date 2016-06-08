@@ -40,7 +40,7 @@ public class BaseController {
         // 创建HttpClient实例
         HttpClient httpclient = new DefaultHttpClient();
         // 创建Get方法实例
-        HttpGet httpgets = new HttpGet("https://sso.tju.edu.cn/cas/logout?service=http://localhost:8080/Me/cas");
+        HttpGet httpgets = new HttpGet("http://sso.tju.edu.cn/cas/logout?service=http://localhost:8080/Me/cas");
         try {
             httpclient.execute(httpgets);
         } catch (IOException e) {

@@ -56,6 +56,11 @@ public class News extends BaseDomain {
     public News() {
     }
 
+    public News( int id,String title, Date updateTime) {
+        this.title = title;
+        this.id = id;
+        this.updateTime = (Timestamp)updateTime;
+    }
 
     public News(int id, String title, String keyWords, String briefContent,String fromUser, int visitedTimes,int status,Date createTime,Date updateTime, Date checkTime,String imageUrl, NewsType type) {
         this.id = id;
@@ -83,7 +88,6 @@ public class News extends BaseDomain {
     }
 
     public String getTitle() {
-        System.out.println("调用了get title");
         return title;
     }
 
@@ -164,7 +168,6 @@ public class News extends BaseDomain {
     }
 
     public Timestamp getCheckTime() {
-        System.out.println("调用了get checkTime");
         return checkTime;
     }
 

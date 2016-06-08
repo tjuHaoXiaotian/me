@@ -51,7 +51,7 @@
         <property name="authenticationCacheName" value="authenticationCache"/>
         <property name="authorizationCachingEnabled" value="true"/>
         <property name="authorizationCacheName" value="authorizationCache"/>
-        <property name="casServerUrlPrefix" value="https://sso.tju.edu.cn/cas"/>
+        <property name="casServerUrlPrefix" value="http://sso.tju.edu.cn/cas"/>
         <property name="casService" value="http://localhost:8080/Me/cas"/>
     </bean>
 
@@ -145,7 +145,7 @@
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
         <!--<property name="loginUrl" value="/admin/login"/>-->
-        <property name="loginUrl" value="https://sso.tju.edu.cn/cas/login?service=http://localhost:8080/Me/cas"/>
+        <property name="loginUrl" value="http://sso.tju.edu.cn/cas/login?service=http://localhost:8080/Me/cas"/>
         <property name="successUrl" value="/index.html"/>
         <property name="filters">
             <util:map>

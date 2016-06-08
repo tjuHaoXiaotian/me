@@ -1,7 +1,7 @@
 package cn.edu.tju.scs.admin.web;
 
 import cn.edu.tju.scs.common.Constants;
-import cn.edu.tju.scs.club.domain.User;
+import cn.edu.tju.scs.me.domain.User;
 import cn.edu.tju.scs.common.dto.BizCode;
 import cn.edu.tju.scs.admin.common.NewsStatusCode;
 import cn.edu.tju.scs.common.dto.StateCode;
@@ -9,20 +9,14 @@ import cn.edu.tju.scs.admin.domain.News;
 import cn.edu.tju.scs.admin.domain.NewsType;
 import cn.edu.tju.scs.admin.service.NewsService;
 import cn.edu.tju.scs.admin.service.NewsTypeService;
-import cn.edu.tju.scs.admin.util.FileUtil;
 import cn.edu.tju.scs.admin.util.MyDate;
-import cn.edu.tju.scs.admin.util.PathUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.io.File;
 import java.sql.Timestamp;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
 
 /**
  * Created by jack on 2016/5/10.
