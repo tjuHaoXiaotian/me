@@ -20,4 +20,12 @@
     <import resource="classpath:spring/spring-config-shiro.xml"/>
 
 
+    <bean class="cn.edu.tju.scs.UrlConfig">
+        <property name="ssoUrlLogout"  value="http://sso.tju.edu.cn/cas/logout"/>
+        <property name="ssoUrlLogin" value="http://sso.tju.edu.cn/cas/login"/>
+        <property name="localUrl" value="http://www.haoxiaotian.cn/"/>
+        <!--<property name="localUrl" value="http://localhost:8080/Me"/>-->
+    </bean>
+
+
 </beans>
