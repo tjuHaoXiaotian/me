@@ -3,7 +3,7 @@
 ####       用到技术：
 ####       后端：Spring, Spring-MVC,Hibernate,Shiro                         
 ####       前端：jquery,UEditor
-
+预览：[http://haoxiaotian.cn/articles.html](http://haoxiaotian.cn/articles.html)
 
 ##二、效果展示
 #### 首页
