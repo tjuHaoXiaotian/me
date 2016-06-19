@@ -1,0 +1,7 @@
+body{
+  font-family: "微软雅黑";
+}
+.slider .slides li .caption {
+    top: 75%;
+    left: 5%;
+  }

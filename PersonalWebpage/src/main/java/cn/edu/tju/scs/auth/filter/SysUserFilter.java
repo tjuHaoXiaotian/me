@@ -24,11 +24,14 @@ public class SysUserFilter extends PathMatchingFilter {
     protected boolean onPreHandle(ServletRequest request, ServletResponse response, Object mappedValue) throws Exception {
 
         String username = (String)SecurityUtils.getSubject().getPrincipal();
-        System.out.println("过滤器："+username + "\n" + userService.findByUsername(username));
-        if(userService.findByUsername(username) == null){
-            ((HttpServletRequest) request).getSession().setAttribute(Constants.CURRENT_USER,username);
-        }else{
-            ((HttpServletRequest) request).getSession().setAttribute(Constants.CURRENT_USER, userService.findByUsername(username));
+        System.out.println("过滤器,session 中添加用户："+username + "\n" + userService.findByUsername(username));
+        if(((HttpServletRequest) request).getSession().getAttribute(Constants.CURRENT_USER) == null){
+            if(userService.findByUsername(username) == null){
+                ((HttpServletRequest) request).getSession().setAttribute(Constants.CURRENT_USER,username);
+            }else{
+//                ((HttpServletRequest) request).getSession().setAttribute(Constants.CURRENT_USER, userService.findByUsername(username));
+                ((HttpServletRequest) request).getSession().setAttribute(Constants.CURRENT_USER,username);
+            }
         }
         return true;
     }

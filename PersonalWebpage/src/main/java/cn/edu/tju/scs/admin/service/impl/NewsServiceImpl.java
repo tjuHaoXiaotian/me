@@ -111,4 +111,19 @@ public class NewsServiceImpl implements NewsService{
     public PageResults<News> getPartsFromTopToEndByType(int typeId,int pageNum,int pageSize) {
         return newsDao.getPartFromTopToBottomByType(typeId,pageNum,pageSize);
     }
+
+    @Override
+    public PageResults<News> findPublishedNewsByPage(Integer typeId,int pageNumber,int pageSize){
+        return newsDao.findPublishedNewsByPage(typeId,pageNumber,pageSize);
+    }
+
+    @Override
+    public News getNext(Integer id) {
+        return newsDao.getNext(id);
+    }
+
+    @Override
+    public News getPrevious(Integer id) {
+        return newsDao.getPrevious(id);
+    }
 }

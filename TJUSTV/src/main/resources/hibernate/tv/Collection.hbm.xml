@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="cn.edu.tju.scs.tv.domain">
+
+<class name="Collection" table="collection">
+    <id name="collectionId" type="java.lang.Integer">
+        <column name="COLLECTION_ID" sql-type="int(11)" not-null="true"/>
+        <!--  //字段自增-->
+        <generator class="native"/>
+
+    </id>
+
+    <property name="userId" type="java.lang.Integer"  not-null="true">
+        <column name="REF_USER_ID" sql-type="int(11)" not-null="true"/>
+    </property>
+
+    <!-- unique="true"保证了外键在Person表中的唯一 -->
+    <many-to-one name="video"  class="Video" not-null="true" lazy="false">
+        <column name="REF_VIDEO_ID" sql-type="int(11)" not-null="true"/>
+    </many-to-one>
+
+
+</class>
+
+</hibernate-mapping>

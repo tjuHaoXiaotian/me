@@ -63,11 +63,11 @@ public class NewsController {
         }
 
         // 设置操作用户：
-        User user = (User) httpSession.getAttribute(Constants.CURRENT_USER);
-        if(user.getAccount().equals("3013218138")){
+        String user = (String) httpSession.getAttribute(Constants.CURRENT_USER);
+        if(user.equals("3013218138")){
             news.setFromUser("郝晓田");
         }else{
-            news.setFromUser(user.getAccount());
+            news.setFromUser(user);
         }
 
         newsService.saveNews(news);
@@ -270,6 +270,7 @@ public class NewsController {
      * @param id
      * @return
      */
+
     @RequestMapping(value = "/recovery/{id}",method = RequestMethod.PUT,produces = {"application/json;charset=UTF-8"})
     public @ResponseBody
     StateCode deDeleteNews(@PathVariable("id") int id){

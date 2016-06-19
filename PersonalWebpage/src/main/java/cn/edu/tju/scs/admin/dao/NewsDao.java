@@ -133,4 +133,42 @@ public class NewsDao extends BaseDao<News,Integer> {
         return query.list();
     }
 
+    /**
+     * 分页查询
+     * @param typeId integer
+     * @param pageNumber int
+     * @param pageSize int
+     * @return  PageResults<News>
+     */
+    public PageResults<News> findPublishedNewsByPage(Integer typeId,int pageNumber,int pageSize){
+        String countHql = null;
+        String hql = null;
+        if(typeId == null){
+            hql = "select new News(id, title, keyWords, briefContent,fromUser, visitedTimes,status,createTime,updateTime,checkTime,imageUrl,type) from News news where news.status = 3 order by news.id desc";
+            countHql = "select count(*) from News news where news.status = 3 order by news.id desc";
+            return this.findPageByFetchedHql(hql,countHql,pageNumber,pageSize);
+        }else{
+            hql = "select new News(id, title, keyWords, briefContent,fromUser, visitedTimes,status,createTime,updateTime,checkTime,imageUrl,type) from News news where news.status = 3 and news.type.id = ? order by news.id desc";
+            countHql = "select count(*) from News news where news.status = 3 and news.type.id = ? order by news.id desc";
+            return this.findPageByFetchedHql(hql,countHql,pageNumber,pageSize,typeId);
+        }
+    }
+
+
+    public News getNext(Integer id){
+        String hql = "select new News(id,title,updateTime) from News news where news.id > ? and news.status = 3 order by news.updateTime asc";
+        Query query = this.getSession().createQuery(hql);
+        query.setParameter(0,id);
+        query.setMaxResults(1);
+        return (News)query.uniqueResult();
+    }
+
+    public News getPrevious(Integer id){
+        String hql = "select new News(id,title,updateTime) from News news where news.id < ? and news.status = 3 order by news.updateTime desc ";
+        Query query = this.getSession().createQuery(hql);
+        query.setParameter(0,id);
+        query.setMaxResults(1);
+        return (News)query.uniqueResult();
+    }
+
 }

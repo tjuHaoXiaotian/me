@@ -90,4 +90,12 @@ public interface NewsService {
     public void deleteNewsByStatus(int id);
 
     public List<News> getRecentNews();
+
+    // 分页查询
+    public PageResults<News> findPublishedNewsByPage(Integer typeId,int pageNumber,int pageSize);
+
+    public News getNext(Integer id);
+
+    public News getPrevious(Integer id);
+
 }

@@ -46,19 +46,10 @@ public class IndexController extends BaseController{
     public String index(){
         Subject subject = SecurityUtils.getSubject();
         if(subject.hasRole("guest:*")){
-            return "redirect:/index";
+            return "redirect:/index.html";
         }else{
             return "/admin/admin-news";
         }
-    }
-
-    /**
-     * 后台投稿
-     * @return
-     */
-    @RequestMapping(value = "/posts/new",method = RequestMethod.GET)
-    public String newPost(){
-        return "/admin/admin-news-drafts-new";
     }
 
 
@@ -71,17 +62,6 @@ public class IndexController extends BaseController{
         return "/admin/admin-news-new";
     }
 
-    /**
-     * 后台查看来稿
-     * @return
-     */
-    @RequestMapping(value = "/posts",method = RequestMethod.GET)
-    public String posts(@RequestParam(value = "status",required = false) Integer status,Model model){
-        if(status != null){
-            model.addAttribute("status",status);
-        }
-        return "/admin/admin-news-drafts";
-    }
 
     /**
      * 后台预览新闻

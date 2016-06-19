@@ -33,6 +33,8 @@ public class ArticleController {
         news.setVisitedTimes(news.getVisitedTimes()+1);
         newsService.updateNews(news);
         model.addAttribute("news",news);
+        model.addAttribute("previous",newsService.getPrevious(id));
+        model.addAttribute("next",newsService.getNext(id));
         return "me/article";
     }
 
@@ -43,9 +45,18 @@ public class ArticleController {
      */
     @RequestMapping(method = RequestMethod.GET,produces = {"application/json;charset=UTF-8"})
     public @ResponseBody
-    StateCode getNewsPublished(@RequestParam(value = "type",required = false) Integer type){
+    StateCode getNewsPublished(@RequestParam(value = "type",required = false) Integer type,
+                               @RequestParam(value = "pageNumber",required = false) Integer pageNumber,
+                               @RequestParam(value = "pageSize",required = false) Integer pageSize){
         StateCode code = StateCode.buildCode(BizCode.SUCCESS);
-        code.addData("newsArray",newsService.getAllPublished(type));
+//        code.addData("newsArray",newsService.getAllPublished(type));
+        if(pageNumber == null || pageNumber < 1){
+            pageNumber = 1;
+        }
+        if(pageSize == null){
+            pageSize = 10;
+        }
+        code.addData("pageResult",newsService.findPublishedNewsByPage(type,pageNumber,pageSize));
         return code;
     }
 
