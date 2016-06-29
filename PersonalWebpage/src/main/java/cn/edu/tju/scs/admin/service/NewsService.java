@@ -94,6 +94,8 @@ public interface NewsService {
     // 分页查询
     public PageResults<News> findPublishedNewsByPage(Integer typeId,int pageNumber,int pageSize);
 
+//    public PageResults<News> findPublishedNewsByType(String type);
+
     public News getNext(Integer id);
 
     public News getPrevious(Integer id);

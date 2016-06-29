@@ -30,6 +30,9 @@
                         <li role="presentation">
                             <a href="https://github.com/tjuHaoXiaotian">github</a>
                         </li>
+                        <li role="presentation">
+                            <a href="${pageContext.request.contextPath}/resources/resume_java.pdf">简历</a>
+                        </li>
                         <c:choose>
                             <c:when test="${user== null}">
                                 <li role="presentation" >

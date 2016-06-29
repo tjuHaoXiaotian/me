@@ -31,6 +31,9 @@
                         <li role="presentation">
                             <a href="https://github.com/tjuHaoXiaotian">github</a>
                         </li>
+                        <li role="presentation">
+                            <a href="${pageContext.request.contextPath}/resources/resume_java.pdf">简历</a>
+                        </li>
                         <c:choose>
                             <c:when test="${user== null}">
                                 <li role="presentation" >
@@ -109,6 +112,39 @@
                     </div>
                 </article>
 
+                <c:forEach var="article" items="${pageResult.results}">
+                    <article class="post tag-about-ghost tag-ghost-in-depth tag-zhu-shou-zhu-shou">
+                        <div class="post-head">
+                            <h1 class="post-title">
+                                <a href="${pageContext.request.contextPath}/articles/article_${article.id}.html">${article.title}</a>
+                            </h1>
+                            <div class="post-meta">
+                                <span class="author">
+                                    作者：
+                                    <a href="#">${article.fromUser}</a>
+                                </span>&bull;
+                                <time class="date" datetime="+row.createTime+">${article.createTime}</time>&nbsp;&nbsp;
+                                <span class="author">
+                                    访问量：
+                                    <a href="">${article.visitedTimes}</a>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="post-content">
+                            <c:if test="${article.imageUrl != null}">
+                                <img align="center" src="${article.imageUrl}"/>
+                            </c:if>
+                            <p style="text-indent: 30px">${article.briefContent}</p>
+                        </div>
+                        <div class="footer clearfix">
+                            <hr>
+                            <div class="pull-right tag-list">
+                                <i class="fa fa-folder-open-o"></i>
+                                <a href="${pageContext.request.contextPath}/articles/article_${article.id}.html">阅读全文</a>
+                            </div>
+                        </div>
+                    </article>
+                </c:forEach>
 
                 <article class="post tag-about-ghost tag-ghost-in-depth tag-zhu-shou-zhu-shou">
                     <div class="post-head">

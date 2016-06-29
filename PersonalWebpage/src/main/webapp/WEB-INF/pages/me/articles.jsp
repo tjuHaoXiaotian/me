@@ -30,6 +30,9 @@
                         <li role="presentation">
                             <a href="https://github.com/tjuHaoXiaotian">github</a>
                         </li>
+                        <li role="presentation">
+                            <a href="${pageContext.request.contextPath}/resources/resume_java.pdf">简历</a>
+                        </li>
                         <c:choose>
                             <c:when test="${user== null}">
                                 <li role="presentation" >
@@ -111,8 +114,8 @@
                                 <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">前一页</span></a></li>
                             </c:when>
                             <c:otherwise>
-                                <li><a href="${pageContext.request.contextPath}/articles.html?pageSize=1&pageNumber=1" aria-label="Previous"><span aria-hidden="true">首页</span></a></li>
-                                <li><a href="${pageContext.request.contextPath}/articles.html?pageSize=1&pageNumber=${pageResult.currentPage-1}" aria-label="Previous"><span aria-hidden="true">前一页</span></a></li>
+                                <li><a href="${pageContext.request.contextPath}/articles.html?pageSize=10&pageNumber=1" aria-label="Previous"><span aria-hidden="true">首页</span></a></li>
+                                <li><a href="${pageContext.request.contextPath}/articles.html?pageSize=10&pageNumber=${pageResult.currentPage-1}" aria-label="Previous"><span aria-hidden="true">前一页</span></a></li>
                             </c:otherwise>
                         </c:choose>
 
@@ -121,10 +124,10 @@
                             <c:if test="${page>=(pageResult.currentPage-3) && page<(pageResult.currentPage+3)}">
                                 <c:choose>
                                     <c:when test="${page == pageResult.currentPage}">
-                                        <li class="active"><a href="${pageContext.request.contextPath}/articles.html?pageSize=1&pageNumber=${page}">${page}<span class="sr-only">(current)</span></a></li>
+                                        <li class="active"><a href="${pageContext.request.contextPath}/articles.html?pageSize=10&pageNumber=${page}">${page}<span class="sr-only">(current)</span></a></li>
                                     </c:when>
                                     <c:otherwise>
-                                        <li><a href="${pageContext.request.contextPath}/articles.html?pageSize=1&pageNumber=${page}">${page}<span class="sr-only">(current)</span></a></li>
+                                        <li><a href="${pageContext.request.contextPath}/articles.html?pageSize=10&pageNumber=${page}">${page}<span class="sr-only">(current)</span></a></li>
                                     </c:otherwise>
                                 </c:choose>
                             </c:if>
@@ -137,8 +140,8 @@
                                 <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">尾页</span></a></li>
                             </c:when>
                             <c:otherwise>
-                                <li><a href="${pageContext.request.contextPath}/articles.html?pageSize=1&pageNumber=${pageResult.currentPage+1}" aria-label="Previous"><span aria-hidden="true">后一页</span></a></li>
-                                <li><a href="${pageContext.request.contextPath}/articles.html?pageSize=1&pageNumber=${pageResult.pageCount}" aria-label="Previous"><span aria-hidden="true">尾页</span></a></li>
+                                <li><a href="${pageContext.request.contextPath}/articles.html?pageSize=10&pageNumber=${pageResult.currentPage+1}" aria-label="Previous"><span aria-hidden="true">后一页</span></a></li>
+                                <li><a href="${pageContext.request.contextPath}/articles.html?pageSize=10&pageNumber=${pageResult.pageCount}" aria-label="Previous"><span aria-hidden="true">尾页</span></a></li>
                             </c:otherwise>
                         </c:choose>
                     </ul>
